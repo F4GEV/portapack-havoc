@@ -58,6 +58,16 @@ float Packet::GPS_longitude() const {
 	return reader_.read(18 * 8, 32) / ((1ULL << 32) / 360.0);
 }
 
+// informations from F4GEV
+//
+// byte 53,54 et 55 humidité from sensor
+// byte 89 & 90  temperature
+// byte 69 battery voltage (hex value to Dec Value*0,0658=batt voltage)
+// byte 72 & 73  microcontroller temp
+// byte 93 to 97 serial number
+// byte 98 frame counter from radiosonde
+
+
 std::string Packet::signature() const {
 	const auto header = reader_.read(0, 24);
 	
